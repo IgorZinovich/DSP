@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using MathNet.Numerics;
-
+using System.Collections;
 
 namespace Lab1
 {
@@ -46,22 +46,26 @@ namespace Lab1
         void draw(ref PictureBox box, Color c)
         {
             PointF[] p;
-            p = new PointF[N];
+            p = new PointF[2*N];
             points.CopyTo(p, 0);
-
+            for( int i = 8; i<2*N;i++)
+            {
+                p[i].X = p[i - 1].X + p[1].X;
+                p[i].Y = p[i - N].Y; 
+            }
             Graphics g = box.CreateGraphics();
             Pen pen1 = new Pen(Color.Black, 1.0F);
 
             float y = 75;
             float x = 20;
             g.DrawLine(pen1, 0, y, 200, y);
-
+            g.DrawLine(pen1, x, 0, x, 150);
 
             Pen pen = new Pen(c, 3.0F);
-            for (int i = 0; i < N; i++)
+            for (int i = 0; i < 2*N; i++)
             {
-                p[i].X = p[i].X * 30 + x;
-                p[i].Y = p[i].Y * 30 + y;
+                p[i].X = p[i].X * 15 + x;
+                p[i].Y = -p[i].Y * 15 + y;
             }
             g.DrawCurve(pen, p);
 
@@ -76,12 +80,12 @@ namespace Lab1
             float y = 75;
             float x = 20;
             g.DrawLine(pen1, 0, y, 200, y);
-
+            g.DrawLine(pen1, x, 0, x, 150);
 
             Pen pen = new Pen(c, 3.0F);
             for (int i = 0; i < N; i++)
             {
-                g.DrawLine(pen, x, y, x, y - 1 - C[i].Phase*20);
+                g.DrawLine(pen, x, y, x, y - 1 - C[i].Phase*15);
                 x += 20;
             }
             
@@ -95,11 +99,12 @@ namespace Lab1
             float y = 75;
             float x = 20;
             g.DrawLine(pen1, 0, y, 200, y);
+            g.DrawLine(pen1, x, 0, x, 150);
 
             Pen pen = new Pen(c, 3.0F);
             for (int i = 0; i < N; i++)
             {
-                g.DrawLine(pen, x, y, x, y - 1 - C[i].Magnitude * 20);
+                g.DrawLine(pen, x, y, x, y - 1 - C[i].Magnitude * 15);
                 x += 20;
             }
 
