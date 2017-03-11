@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using MathNet.Numerics;
 using System.Collections;
+using System.Numerics;
 
 namespace Lab1
 {
     public partial class Form1 : Form
     {
         private const int N = 8;
-        Complex32[] C;
-        Complex32[] X = new Complex32[N];
-        Complex32[] newX;
+        Complex[] C;
+        Complex[] X = new Complex[N];
+        Complex[] newX;
         PointF[] points;
 
         public Form1()
         {
             InitializeComponent();
-
+     
         }
         public void doit()
         {
@@ -46,13 +46,10 @@ namespace Lab1
         void draw(ref PictureBox box, Color c)
         {
             PointF[] p;
-            p = new PointF[2*N];
+            p = new PointF[N+1];
             points.CopyTo(p, 0);
-            for( int i = 8; i<2*N;i++)
-            {
-                p[i].X = p[i - 1].X + p[1].X;
-                p[i].Y = p[i - N].Y; 
-            }
+                p[N].X = p[N-1].X + p[1].X;
+                p[N].Y = p[0].Y; 
             Graphics g = box.CreateGraphics();
             Pen pen1 = new Pen(Color.Black, 1.0F);
 
@@ -62,7 +59,7 @@ namespace Lab1
             g.DrawLine(pen1, x, 0, x, 150);
 
             Pen pen = new Pen(c, 3.0F);
-            for (int i = 0; i < 2*N; i++)
+            for (int i = 0; i < N+1; i++)
             {
                 p[i].X = p[i].X * 15 + x;
                 p[i].Y = -p[i].Y * 15 + y;
@@ -85,7 +82,7 @@ namespace Lab1
             Pen pen = new Pen(c, 3.0F);
             for (int i = 0; i < N; i++)
             {
-                g.DrawLine(pen, x, y, x, y - 1 - C[i].Phase*15);
+                g.DrawLine(pen, x, y, x, (float)(y - 1 - C[i].Phase * 15));
                 x += 20;
             }
             
@@ -104,7 +101,7 @@ namespace Lab1
             Pen pen = new Pen(c, 3.0F);
             for (int i = 0; i < N; i++)
             {
-                g.DrawLine(pen, x, y, x, y - 1 - C[i].Magnitude * 15);
+                g.DrawLine(pen, x, y, x, y - 1 - (float)C[i].Magnitude * 15);
                 x += 20;
             }
 

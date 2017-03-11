@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using MathNet.Numerics;
+using System.Numerics;
 
 namespace Lab1
 {
@@ -25,20 +25,20 @@ namespace Lab1
             }
         }
 
-        public static void pointToComplex(ref PointF[] p, ref Complex32[] c)
+        public static void pointToComplex(ref PointF[] p, ref Complex[] c)
         {
             int i = 0;
             foreach(var item in p)
             {
-                c[i++] = new Complex32(item.Y, 0);
+                c[i++] = new Complex(item.Y, 0);
             }
         }
 
-        public static void complexToPoint(ref PointF[] p, ref Complex32[] c)
+        public static void complexToPoint(ref PointF[] p, ref Complex[] c)
         {
             for(int i = 0; i < p.Length; i++)
             {
-                p[i].Y = c[i].Real;
+                p[i].Y = (float)c[i].Real;
             }
         }
 
