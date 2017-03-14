@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
 
-namespace Lab1
+namespace Lab2
 {
     static class Fourier
     {    
