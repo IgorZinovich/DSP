@@ -20,7 +20,6 @@ namespace Lab2
         public Form1()
         {
             InitializeComponent();
-     
         }
         public void doit()
         {
@@ -65,8 +64,6 @@ namespace Lab2
                 p[i].Y = -p[i].Y * 15 + y;
             }
             g.DrawCurve(pen, p);
-
-
         }
 
         void draw1(ref PictureBox box, Color c, Complex[] f)
